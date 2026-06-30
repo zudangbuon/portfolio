@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel - LQM Portfolio</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/admin.css" />
+</head>
+<body>
+
+  <!-- Login Section -->
+  <section id="login-section" class="admin-full-screen">
+    <div class="login-card">
+      <h2 class="section-title text-gradient" style="font-size: 2.5rem; text-align: center;">Admin Login</h2>
+      <form id="admin-login-form" class="contact-form" style="background: transparent; border: none; box-shadow: none;">
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" required placeholder="admin@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" required placeholder="••••••••" />
+        </div>
+        <button type="submit" class="btn-primary btn-full" style="margin-top: 1rem;" id="btn-login">
+          <span class="btn-text">Login</span>
+        </button>
+        <p id="login-error" class="error-text"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Dashboard Section -->
+  <section id="dashboard-section" class="hidden dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="logo-bracket">&lt;</span>Admin<span class="logo-bracket">/&gt;</span>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-tab="settings">⚙️ Settings</button>
+        <button class="nav-btn" data-tab="skills">⚡ Skills</button>
+        <button class="nav-btn" data-tab="education">🎓 Education</button>
+        <button class="nav-btn" data-tab="activities">🏆 Activities</button>
+        <button class="nav-btn" data-tab="projects">📁 Projects</button>
+        <button class="nav-btn" data-tab="ctfs">🏴 CTFs</button>
+        <button class="nav-btn" data-tab="platforms">💻 Platforms</button>
+        <button class="nav-btn" data-tab="messages">✉️ Messages</button>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="btn-logout" class="btn-outline btn-full">Logout</button>
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+      <!-- Tab: Messages -->
+      <div id="tab-messages" class="tab-pane hidden">
+        <div class="pane-header">
+          <h2 class="section-title" style="margin: 0; font-size: 2rem;">Messages</h2>
+          <button id="btn-refresh-messages" class="btn-outline">Refresh</button>
+        </div>
+        <div class="table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th style="width: 10%;">Date</th>
+                  <th style="width: 15%;">Name</th>
+                  <th style="width: 15%;">Email</th>
+                  <th style="width: 15%;">Subject</th>
+                  <th style="width: 35%;">Message</th>
+                  <th style="width: 10%;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="messages-tbody">
+                <tr><td colspan="6">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab: Projects -->
+      <div id="tab-projects" class="tab-pane hidden">
+        <div class="pane-header">
+          <h2 class="section-title" style="margin: 0; font-size: 2rem;">Projects</h2>
+          <button class="btn-primary btn-add" data-type="project">+ Add Project</button>
+        </div>
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Tags</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="projects-tbody">
+              <tr><td colspan="4">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab: CTFs -->
+      <div id="tab-ctfs" class="tab-pane hidden">
+        <div class="pane-header">
+          <h2 class="section-title" style="margin: 0; font-size: 2rem;">CTFs</h2>
+          <button class="btn-primary btn-add" data-type="ctf">+ Add CTF</button>
+        </div>
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Rank</th>
+                <th>Year</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ctfs-tbody">
+              <tr><td colspan="4">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab: Skills -->
+      <div id="tab-skills" class="tab-pane hidden">
+        <div class="pane-header">
+          <h2 class="section-title" style="margin: 0; font-size: 2rem;">Skills</h2>
+          <button class="btn-primary btn-add" data-type="skill">+ Add Skill</button>
+        </div>
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Level</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="skills-tbody">
+              <tr><td colspan="4">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab: Education -->
+      <div id="tab-education" class="tab-pane hidden">
+        <div class="pane-header">
+          <h2 class="section-title" style="margin: 0; font-size: 2rem;">Education</h2>
+          <button class="btn-primary btn-add" data-type="education">+ Add Education</button>
+        </div>
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Role/Degree</th>
+                <th>Institution</th>
+                <th>Years</th>
+                <th>Order</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="education-tbody">
+              <tr><td colspan="5">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab: Activities -->
+      <div id="tab-activities" class="tab-pane hidden">
+        <div class="pane-header">
+          <h2 class="section-title" style="margin: 0; font-size: 2rem;">Activities & Awards</h2>
+          <button class="btn-primary btn-add" data-type="activity">+ Add Activity</button>
+        </div>
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Role/Award</th>
+                <th>Organization</th>
+                <th>Years</th>
+                <th>Order</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="activities-tbody">
+              <tr><td colspan="5">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab: Platforms -->
+      <div id="tab-platforms" class="tab-pane hidden">
+        <div class="pane-header">
+          <h2 class="section-title" style="margin: 0; font-size: 2rem;">Platforms</h2>
+          <button class="btn-primary btn-add" data-type="platform">+ Add Platform</button>
+        </div>
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Link</th>
+                <th>Order</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="platforms-tbody">
+              <tr><td colspan="4">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+      <!-- Tab: Settings -->
+      <div id="tab-settings" class="tab-pane active">
+        <div class="pane-header">
+          <h2 class="section-title" style="margin: 0; font-size: 2rem;">Settings</h2>
+          <button class="btn-primary" id="btn-save-settings">Save Settings</button>
+        </div>
+        <form class="contact-form" style="max-width: 800px; background: transparent; border: none;">
+          <h3 style="color: var(--clr-accent); margin-top: 1rem;">Hero Section</h3>
+          <div class="form-group">
+            <label>Hero Title</label>
+            <input type="text" id="setting-hero-title" placeholder="e.g. Securing the Cyber World" />
+          </div>
+          <div class="form-group">
+            <label>Hero Subtitle</label>
+            <textarea id="setting-hero-subtitle" rows="3" placeholder="Hi, I'm..."></textarea>
+          </div>
+          <div class="form-row" style="display: flex; gap: 1rem;">
+            <div class="form-group" style="flex: 1;">
+              <label>Stat CTF</label>
+              <input type="text" id="setting-stat-ctf" placeholder="e.g. 4" />
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label>Stat Languages</label>
+              <input type="text" id="setting-stat-languages" placeholder="e.g. 5" />
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label>Stat Platforms</label>
+              <input type="text" id="setting-stat-platforms" placeholder="e.g. 4" />
+            </div>
+          </div>
+
+          <h3 style="color: var(--clr-accent); margin-top: 2rem;">About Info</h3>
+          <div class="form-group">
+            <label>About Text</label>
+            <textarea id="setting-about" rows="6" placeholder="I'm a..."></textarea>
+          </div>
+          <div class="form-row" style="display: flex; gap: 1rem;">
+            <div class="form-group" style="flex: 1;">
+              <label>GPA</label>
+              <input type="text" id="setting-gpa" placeholder="e.g. 3.2" />
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label>Location</label>
+              <input type="text" id="setting-location" placeholder="e.g. Hanoi, Vietnam" />
+            </div>
+          </div>
+          <div class="form-row" style="display: flex; gap: 1rem;">
+            <div class="form-group" style="flex: 1;">
+              <label>Email</label>
+              <input type="text" id="setting-email" placeholder="e.g. email@example.com" />
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label>Phone</label>
+              <input type="text" id="setting-phone" placeholder="e.g. 0123 456 789" />
+            </div>
+          </div>
+
+          <h3 style="color: var(--clr-accent); margin-top: 2rem;">Social Links</h3>
+          <div class="form-row" style="display: flex; gap: 1rem;">
+            <div class="form-group" style="flex: 1;">
+              <label>GitHub URL</label>
+              <input type="text" id="setting-github-url" placeholder="https://github.com/..." />
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label>LinkedIn URL</label>
+              <input type="text" id="setting-linkedin-url" placeholder="https://linkedin.com/..." />
+            </div>
+          </div>
+          <div class="form-row" style="display: flex; gap: 1rem;">
+            <div class="form-group" style="flex: 1;">
+              <label>Facebook URL</label>
+              <input type="text" id="setting-facebook-url" placeholder="https://facebook.com/..." />
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label>Instagram URL</label>
+              <input type="text" id="setting-instagram-url" placeholder="https://instagram.com/..." />
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </main>
+  </section>
+
+  <!-- CRUD Modal -->
+  <div id="crud-modal" class="admin-overlay hidden">
+    <div class="modal-card contact-form">
+      <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--clr-border); padding-bottom: 1rem; margin-bottom: 1rem;">
+        <h3 id="modal-title" style="font-family: var(--font-display); font-size: 1.5rem; color: var(--clr-white); margin: 0;">Edit Item</h3>
+        <button id="btn-modal-close" class="btn-close" style="background: transparent; border: none; font-size: 2rem; color: var(--clr-text); cursor: pointer;">&times;</button>
+      </div>
+      <form id="crud-form">
+        <div id="modal-fields" class="modal-body" style="display: flex; flex-direction: column; gap: 1rem; max-height: 60vh; overflow-y: auto; padding-right: 10px;">
+          <!-- Dynamically injected fields -->
+        </div>
+        <div class="modal-footer" style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: flex-end;">
+          <button type="button" class="btn-outline" id="btn-modal-cancel">Cancel</button>
+          <button type="submit" class="btn-primary" id="btn-modal-save">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="/src/admin.ts"></script>
+</body>
+</html>
