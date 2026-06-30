@@ -520,12 +520,11 @@ crudForm.addEventListener('submit', async (e) => {
   const data: any = {};
   
   formData.forEach((val, key) => {
-    if (val) {
-      if (key === 'tags') {
-        data[key] = (val as string).split(',').map(s => s.trim());
-      } else {
-        data[key] = val;
-      }
+    if (key === 'tags') {
+      const strVal = (val as string).trim();
+      data[key] = strVal ? strVal.split(',').map(s => s.trim()).filter(Boolean) : [];
+    } else {
+      data[key] = val;
     }
   });
 
